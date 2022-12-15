@@ -122,28 +122,6 @@ impl<T: Debug + Ord> Graph <T> {
         println!("{}",self.debug())
     }
 
-    pub fn remove_node(&mut self,index:usize) -> bool{
-        if self.nodes.contains_key(&index){
-            false
-        }else{
-            self.nodes.remove(&index);
-            self.matrix[index].fill(None);
-            for i in 1..=self.bound() {
-                self.matrix[i][index] = None;
-            }
-            true
-        }
-    }
-
-    pub fn remove_edge(&mut self,from:usize,to:usize) -> bool{
-        if from.max(to) > self.bound() {
-            false
-        }else{
-            self.matrix[from][to] = None;
-            true
-        }
-    }
-
     pub fn bound(&self) -> usize{
         match self.nodes.iter().max() {
             Some((&e,_)) => e,
